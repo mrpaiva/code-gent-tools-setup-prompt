@@ -1,4 +1,4 @@
-# code-agent-tools-prompt
+# Code Agent tools setup prompt
 
 Prompt para criação automática de ferramentas que otimizam 
 o consumo de tokens em agentes de código.
