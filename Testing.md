@@ -10,12 +10,12 @@ o impacto de mudar a assinatura.
 
 ## Pré-requisitos
 
-- Code agent instalado e rodando na raiz do projeto
+- Um agente de código de sua preferência (Claude Code, OpenCode, Copilot, Cursor ou similar)
 - Rodada 2 requer as ferramentas já criadas pelo prompt de setup
 
 ## Rodada 1 — Sem ferramentas
 
-Abre o Claude Code na raiz do projeto e cola:
+Abre seu agente de código na raiz do projeto e cola:
 
 ```
 Quero entender o impacto de mudar a assinatura do método [nome do método].
@@ -32,7 +32,7 @@ Anota os números e tira print do relatório final.
 
 ## Rodada 2 — Com ferramentas
 
-Abre uma sessão nova (contexto zerado) e cola:
+Abre uma sessão nova no seu agente (contexto zerado) e cola:
 
 ```
 Quero entender o impacto de mudar a assinatura do método [nome do método].
