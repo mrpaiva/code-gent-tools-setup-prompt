@@ -10,7 +10,7 @@ o impacto de mudar a assinatura.
 
 ## Pré-requisitos
 
-- Claude Code instalado e rodando na raiz do projeto
+- Code agent instalado e rodando na raiz do projeto
 - Rodada 2 requer as ferramentas já criadas pelo prompt de setup
 
 ## Rodada 1 — Sem ferramentas
