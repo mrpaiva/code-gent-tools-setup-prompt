@@ -134,6 +134,30 @@ resolve a necessidade. Eles são otimizados para este projeto e reduzem consumo 
 2. Use `summarize_file` antes de `read_file` para decidir se vale ler tudo
 3. Use `list_changed_files` no início de tarefas de revisão ou debugging
 4. Só leia arquivos completos quando as ferramentas acima não forem suficientes
+
+### Fluxos recomendados
+
+#### Análise de impacto
+1. `find_usages <símbolo>` → mapeia referências
+2. `summarize_file` nos arquivos de definição → revela overloads e tipos
+3. `Read` com offset nos call sites do meio de arquivo → expõe tipo da variável
+4. `summarize_file` nos tipos dos parâmetros → revela hierarquia
+
+#### Debugging / investigação de bug
+1. `list_changed_files` → foca nos arquivos alterados recentemente
+2. `search_symbol <termo relacionado>` → localiza onde o comportamento é definido
+3. `summarize_file` nos candidatos → decide quais merecem leitura completa
+
+#### Refatoração
+1. `search_symbol <símbolo>` → onde está definido
+2. `find_usages <símbolo>` → onde é usado
+3. `summarize_file` nos arquivos de uso → entende o contexto antes de mudar
+
+#### Onboarding em código desconhecido
+1. `list_changed_files` → o que mudou recentemente
+2. `search_symbol <conceito central>` → onde a lógica principal vive
+3. `summarize_file` nos arquivos-chave → visão geral sem ler tudo
+
 ```
 
 ---
