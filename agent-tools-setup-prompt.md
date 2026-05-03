@@ -140,8 +140,32 @@ resolve a necessidade. Eles são otimizados para este projeto e reduzem consumo 
 #### Análise de impacto
 1. `find_usages <símbolo>` → mapeia referências
 2. `summarize_file` nos arquivos de definição → revela overloads e tipos
+3. `Read` com offset nos call sites do meio de arquivo → expõe tipo da variável### Fluxos recomendados
+
+#### Análise de impacto
+1. `find_usages <símbolo>` → mapeia referências
+2. `summarize_file` nos arquivos de definição → revela overloads e tipos
 3. `Read` com offset nos call sites do meio de arquivo → expõe tipo da variável
-4. `summarize_file` nos tipos dos parâmetros → revela hierarquia
+4. **`summarize_file` nos tipos dos parâmetros → revela hierarquia**
+   - **⚠️ GATE OBRIGATÓRIO:** Se `find_usages` ou `search_symbol` encontrarem **mais de uma definição** com o mesmo nome (ex: dois `GetTotal` em arquivos diferentes), você DEVE verificar a hierarquia de tipos ANTES de concluir a análise.
+   - Verifique: o tipo do parâmetro é uma classe concreta própria do projeto, ou uma interface implementada em múltiplos projetos?
+   - Em um monorepo, um método com o mesmo nome pode ser **dois métodos totalmente independentes** em projetos diferentes. Nunca assuma que são a mesma coisa.
+5. Se o escopo do usuário for restrito a um projeto (ex: "no projeto X"), mas você encontrar definições do mesmo símbolo em outros projetos do monorepo, documente: **"Este relatório cobre apenas o projeto X. Foram detectadas definições homônimas no projeto Y (caminho), mas elas não foram analisadas."
+
+#### Debugging / investigação de bug
+1. `list_changed_files` → foca nos arquivos alterados recentemente
+2. `search_symbol <termo relacionado>` → localiza onde o comportamento é definido
+3. `summarize_file` nos candidatos → decide quais merecem leitura completa
+
+#### Refatoração
+1. `search_symbol <símbolo>` → onde está definido
+2. `find_usages <símbolo>` → onde é usado
+3. `summarize_file` nos arquivos de uso → entende o contexto antes de mudar
+
+#### Onboarding em código desconhecido
+1. `list_changed_files` → o que mudou recentemente
+2. `search_symbol <conceito central>` → onde a lógica principal vive
+3. `summarize_file` nos arquivos-chave → visão geral sem ler tudo
 
 #### Debugging / investigação de bug
 1. `list_changed_files` → foca nos arquivos alterados recentemente
